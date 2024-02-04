@@ -52,5 +52,8 @@ return require('packer').startup(function(use)
 	use 'mfussenegger/nvim-dap'
 	use 'rcarriga/nvim-dap-ui'
 	use 'nvim-java/nvim-java-dap'
+	use 'nvim-tree/nvim-tree.lua'
+	use 'nvim-tree/nvim-web-devicons'
+
 
 end)
