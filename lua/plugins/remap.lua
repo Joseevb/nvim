@@ -20,3 +20,8 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "<leader>ft", ":NvimTreeToggle <CR>")
+
+vim.keymap.set("n", "<leader>je", ":split | term java -cp .\\bin\\ App <CR>")
+vim.keymap.set("n", "<leader>jc", ":split | term javac -d .\\bin\\ .\\src\\*.java <CR>")
+
+vim.keymap.set("n", "<leader>mj", ":! mkdir .\\bin\\ && mkdir .\\src\\ && type nul > .\\src\\App.java <CR><CR>")
