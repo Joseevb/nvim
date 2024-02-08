@@ -18,6 +18,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             local lsp_zero = require("lsp-zero")
+            lsp_zero.extend_lspconfig()
 
             require("mason-lspconfig").setup({
                 ensure_installed = {"lua_ls", "jdtls", "cssls", "emmet_language_server"},

@@ -25,3 +25,6 @@ vim.keymap.set("n", "<leader>je", ":split | term java -cp .\\bin\\ App <CR>")
 vim.keymap.set("n", "<leader>jc", ":split | term javac -d .\\bin\\ .\\src\\*.java <CR>")
 
 vim.keymap.set("n", "<leader>mj", ":! mkdir .\\bin\\ && mkdir .\\src\\ && type nul > .\\src\\App.java <CR><CR>")
+
+--requires live server to be installed npm i -g live-server
+vim.keymap.set("n", "<leader>ls", ":term live-server . <CR>")
