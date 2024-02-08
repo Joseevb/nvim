@@ -22,6 +22,12 @@ return {
                 ensure_installed = {"lua_ls", "jdtls", "cssls", "emmet_language_server"},
                 handlers = {
                     lsp_zero.default_setup,
+
+                    emmet_language_server = function ()
+                       require("lspconfig").emmet_language_server.setup({
+                            filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "pug", "typescriptreact", "xml", "xsd", "dtd" },
+                        })
+                    end
                 },
             })
 
