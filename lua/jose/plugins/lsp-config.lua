@@ -5,18 +5,16 @@ return {
     {'hrsh7th/cmp-nvim-lsp'},
     {'hrsh7th/nvim-cmp'},
     {'L3MON4D3/LuaSnip'},
+    {"j-hui/fidget.nvim"},
 
     --mason
-    {
-        "williamboman/mason.nvim",
-        config = function()
-            require("mason").setup()
-        end
-    },
+    {"williamboman/mason.nvim"},
     --mason-lspconfig
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
+            require("fidget").setup({})
+            require("mason").setup()
             local lsp_zero = require("lsp-zero")
             lsp_zero.extend_lspconfig()
 
