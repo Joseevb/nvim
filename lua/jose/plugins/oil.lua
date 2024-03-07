@@ -14,6 +14,10 @@ return {
             view_options = {
                 show_hidden = true,
             },
-        })       
+
+            sort = {
+                { "size", "asc"},
+            },
+        })      
     end
 }
