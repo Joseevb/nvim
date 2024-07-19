@@ -99,7 +99,7 @@ return {
                     {name = 'nvim_lsp'},
                     {name = 'nvim_lua'},
                     {name = 'luasnip', keyword_length = 2},
-                    {name = 'buffer', keyword_length = 3},
+                    {name = 'buffer'},
                 },
                 formatting = lsp_zero.cmp_format(),
                 mapping = cmp.mapping.preset.insert({
@@ -108,6 +108,13 @@ return {
                     ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
                     ['<CR>'] = cmp.mapping.confirm({ select = true }),
                 }),
+            })
+
+            cmp.setup.filetype({"sql"}, {
+                sources = {
+                    { name = "vim-dadbod-completion" },
+                    { name = "buffer" }
+                },
             })
         end
     },

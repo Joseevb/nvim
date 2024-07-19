@@ -18,6 +18,6 @@ return {
             sort = {
                 { "size", "asc"},
             },
-        })      
+        })
     end
 }
