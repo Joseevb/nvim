@@ -1,8 +1,11 @@
+-- Set termguicolors to enable true colors support
+vim.opt.termguicolors = true
+
 return {
-    "catppuccin/nvim", 
+    "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
-    config = function() 
+    config = function()
         require("catppuccin").setup({
             flavour = "macchiato", -- latte, frappe, macchiato, mocha
             background = { -- :h background
@@ -17,11 +20,11 @@ return {
             shade = "dark",
             percentage = 0.15, -- percentage of the shade to apply to the inactive window
         },
-        no_italic = false, -- Force no italic
-        no_bold = false, -- Force no bold
-        no_underline = false, -- Force no underline
-        styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-        comments = { "italic" }, -- Change the style of comments
+        no_italic = false, -- force no italic
+        no_bold = false, -- force no bold
+        no_underline = false, -- force no underline
+        styles = { -- handles the styles of general hi groups (see `:h highlight-args`):
+        comments = { "italic" }, -- change the style of comments
         conditionals = { "italic" },
         loops = {"bold"},
         functions = {"italic"},
@@ -46,7 +49,7 @@ return {
             enabled = true,
             indentscope_color = "",
         },
-        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+        -- for more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
     })
 

@@ -8,6 +8,7 @@ return {
     {"j-hui/fidget.nvim"},
     {'jose-elias-alvarez/null-ls.nvim'},
     {'MunifTanjim/prettier.nvim'},
+    {'rafamadriz/friendly-snippets'},
 
     --mason
     {"williamboman/mason.nvim"},
@@ -21,7 +22,7 @@ return {
             require("mason").setup()
 
             require("mason-lspconfig").setup({
-                ensure_installed = {"lua_ls", "jdtls", "cssls", "emmet_language_server"},
+                ensure_installed = {"lua_ls", "jdtls", "cssls", "emmet_language_server", "intelephense"},
                 handlers = {
                     lsp_zero.default_setup,
 
@@ -29,9 +30,26 @@ return {
                        require("lspconfig").emmet_language_server.setup({
                             filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "pug", "typescriptreact", "xml", "xsd", "dtd" , "jsx"},
                         })
+                    end,
+
+                    intelephense = function()
+                        require("lspconfig").intelephense.setup({
+                            settings = {
+                                intelephense = {
+                                    files = {
+                                        maxSize = 5000000; -- Set max file size if needed
+                                    },
+                                },
+                            },
+                        })
                     end
                 },
             })
+
+            require('lspconfig').intelephense.setup({
+                root_dir = require('lspconfig.util').root_pattern('composer.json', '.git', '*.php'),
+            })
+
 
             local null_ls = require("null-ls")
 
@@ -90,6 +108,10 @@ return {
                 },
             })
 
+            local luasnip = require('luasnip')
+
+            require('luasnip.loaders.from_vscode').lazy_load()
+
             local cmp = require('cmp')
             local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
@@ -110,6 +132,8 @@ return {
                 }),
             })
 
+            vim.api.nvim_set_keymap('i', '<C-k>', [[<cmd>lua require'luasnip'.expand_or_jump()<CR>]], { noremap = true, silent = true })
+
             cmp.setup.filetype({"sql"}, {
                 sources = {
                     { name = "vim-dadbod-completion" },
@@ -119,3 +143,4 @@ return {
         end
     },
 }
+

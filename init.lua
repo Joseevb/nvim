@@ -19,4 +19,8 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   command = 'Prettier'
 })
 
+vim.o.foldmethod = 'syntax'
+
+vim.opt.autochdir = true
+
 require("jose")
