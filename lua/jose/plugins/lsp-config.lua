@@ -1,18 +1,17 @@
 return {
-    --lsp-zero
-    {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
-    {'neovim/nvim-lspconfig'},
-    {'hrsh7th/cmp-nvim-lsp'},
-    {'hrsh7th/nvim-cmp'},
-    {'L3MON4D3/LuaSnip'},
-    {"j-hui/fidget.nvim"},
-    {'jose-elias-alvarez/null-ls.nvim'},
-    {'MunifTanjim/prettier.nvim'},
-    {'rafamadriz/friendly-snippets'},
+    -- LSP Zero and related plugins
+    { 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' },
+    { 'neovim/nvim-lspconfig' },
+    { 'hrsh7th/cmp-nvim-lsp' },
+    { 'hrsh7th/nvim-cmp' },
+    { 'L3MON4D3/LuaSnip' },
+    { "j-hui/fidget.nvim" },
+    { 'jose-elias-alvarez/null-ls.nvim' },
+    { 'MunifTanjim/prettier.nvim' },
+    { 'rafamadriz/friendly-snippets' },
 
-    --mason
-    {"williamboman/mason.nvim"},
-    --mason-lspconfig
+    -- Mason and related plugins
+    { "williamboman/mason.nvim" },
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
@@ -22,13 +21,13 @@ return {
             require("mason").setup()
 
             require("mason-lspconfig").setup({
-                ensure_installed = {"lua_ls", "jdtls", "cssls", "emmet_language_server", "intelephense"},
+                ensure_installed = { "lua_ls", "jdtls", "cssls", "emmet_language_server", "intelephense" },
                 handlers = {
                     lsp_zero.default_setup,
 
-                    emmet_language_server = function ()
-                       require("lspconfig").emmet_language_server.setup({
-                            filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "pug", "typescriptreact", "xml", "xsd", "dtd" , "jsx"},
+                    emmet_language_server = function()
+                        require("lspconfig").emmet_language_server.setup({
+                            filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "pug", "typescriptreact", "xml", "xsd", "dtd", "jsx" },
                         })
                     end,
 
@@ -37,19 +36,18 @@ return {
                             settings = {
                                 intelephense = {
                                     files = {
-                                        maxSize = 5000000; -- Set max file size if needed
+                                        maxSize = 5000000, -- Set max file size if needed
                                     },
                                 },
                             },
                         })
-                    end
+                    end,
                 },
             })
 
             require('lspconfig').intelephense.setup({
                 root_dir = require('lspconfig.util').root_pattern('composer.json', '.git', '*.php'),
             })
-
 
             local null_ls = require("null-ls")
 
@@ -59,7 +57,7 @@ return {
 
             null_ls.setup({
                 on_attach = function(client, bufnr)
-                    if client.supports_method("textDocument/formatting") then
+                    if client.supports_method("textDocument.formatting") then
                         vim.keymap.set("n", "<Leader>f", function()
                             vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
                         end, { buffer = bufnr, desc = "[lsp] format" })
@@ -76,7 +74,7 @@ return {
                         })
                     end
 
-                    if client.supports_method("textDocument/rangeFormatting") then
+                    if client.supports_method("textDocument.rangeFormatting") then
                         vim.keymap.set("x", "<Leader>f", function()
                             vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
                         end, { buffer = bufnr, desc = "[lsp] format" })
@@ -108,20 +106,18 @@ return {
                 },
             })
 
-            local luasnip = require('luasnip')
-
             require('luasnip.loaders.from_vscode').lazy_load()
 
             local cmp = require('cmp')
-            local cmp_select = {behavior = cmp.SelectBehavior.Select}
+            local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
             cmp.setup({
                 sources = {
-                    {name = 'path'},
-                    {name = 'nvim_lsp'},
-                    {name = 'nvim_lua'},
-                    {name = 'luasnip', keyword_length = 2},
-                    {name = 'buffer'},
+                    { name = 'path' },
+                    { name = 'nvim_lsp' },
+                    { name = 'nvim_lua' },
+                    { name = 'luasnip', keyword_length = 2 },
+                    { name = 'buffer' },
                 },
                 formatting = lsp_zero.cmp_format(),
                 mapping = cmp.mapping.preset.insert({
@@ -142,5 +138,25 @@ return {
             })
         end
     },
+
+    -- Initial setup
+    init = function()
+        require("lazyvim.util").on_attach(function(client)
+            -- Uncomment and configure if needed
+            -- if client.name == "jdtls" then
+            --   local jdtls = require("jdtls")
+            --   jdtls.setup_dap({ hotcodereplace = "auto" })
+            --   jdtls.setup.add_commands()
+            --   -- Auto-detect main and setup dap config
+            --   require("jdtls.dap").setup_dap_main_class_configs({
+            --     config_overrides = {
+            --       -- vmArgs = "-Dspring.profiles.active=local",
+            --     },
+            --   })
+            -- end
+        end)
+    end,
+
+
 }
 

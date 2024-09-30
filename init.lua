@@ -21,6 +21,4 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 
 vim.o.foldmethod = 'syntax'
 
-vim.opt.autochdir = true
-
 require("jose")
