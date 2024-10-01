@@ -19,6 +19,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   command = 'Prettier'
 })
 
-vim.o.foldmethod = 'syntax'
+vim.o.foldmethod = 'indent'
 
 require("jose")

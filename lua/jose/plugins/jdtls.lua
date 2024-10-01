@@ -1,4 +1,4 @@
--- To make java work with lomobok, this must be added to .bashrc or .zshrc
+-- Must add this to .bashrc or .zshrc: 
 -- export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/nvim/mason/share/jdtls/lombok.jar"
 
 return {
@@ -51,7 +51,10 @@ return {
                             end
                         end,
                     })
-                    -- 
+                    -- Go to definition
+                    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
+
+                    -- Trigger code action
                     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
 
                     -- Automatically add imports on paste
