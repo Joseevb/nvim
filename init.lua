@@ -19,6 +19,13 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   command = 'Prettier'
 })
 
-vim.o.foldmethod = 'indent'
+vim.o.foldmethod = 'syntax'
+
+-- Enable auto reloading of files changed outside of Neovim
+vim.opt.autoread = true
+-- Check for changes in files when gaining focus or switching buffers
+vim.cmd([[
+  autocmd FocusGained,BufEnter * checktime
+]])
 
 require("jose")
